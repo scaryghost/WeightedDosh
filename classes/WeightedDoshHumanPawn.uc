@@ -5,7 +5,7 @@ var float prevGroundSpeed;
 simulated event ModifyVelocity(float DeltaTime, vector OldVelocity) {
     local float WeightMod, HealthMod;
     local float EncumbrancePercentage;
-    local int myScore;
+    local float myScore;
     local string speedMsg;
 
     super(KFPawn).ModifyVelocity(DeltaTime, OldVelocity);
@@ -27,9 +27,11 @@ simulated event ModifyVelocity(float DeltaTime, vector OldVelocity) {
             GroundSpeed *= KFPlayerReplicationInfo(PlayerReplicationInfo).ClientVeteranSkill.static.GetMovementSpeedModifier(KFPlayerReplicationInfo(PlayerReplicationInfo));
         }
 
+        GroundSpeed*= 1-fmin(1, myScore/class'WeightedDoshMut'.default.maxScore);
+
         if (class'WeightedDoshMut'.default.bDispSpeed && 
                 prevGroundSpeed != GroundSpeed) {
-            speedMsg= chr(27)$chr(200)$chr(1)$chr(1)$"Ground speed: "$GroundSpeed;
+            speedMsg= chr(27)$chr(150)$chr(26)$chr(26)$"Ground speed: "$GroundSpeed;
             KFPC.ClientMessage(speedMsg);
             prevGroundSpeed= GroundSpeed;
         }
