@@ -1,17 +1,17 @@
 class WeightedDoshHumanPawn extends KFHumanPawn;
 
-var float prevGroundSpeed;
+var float prevScore;
 
 simulated event ModifyVelocity(float DeltaTime, vector OldVelocity) {
     local float WeightMod, HealthMod;
     local float EncumbrancePercentage;
-    local float myScore;
+    local int currScore;
     local string speedMsg;
 
     super(KFPawn).ModifyVelocity(DeltaTime, OldVelocity);
 
     if (Controller != none) {
-        myScore= int(Controller.PlayerReplicationInfo.Score);
+        currScore= int(Controller.PlayerReplicationInfo.Score);
 
         EncumbrancePercentage = (FMin(CurrentWeight, MaxCarryWeight)/default.MaxCarryWeight);
 
@@ -27,17 +27,17 @@ simulated event ModifyVelocity(float DeltaTime, vector OldVelocity) {
             GroundSpeed *= KFPlayerReplicationInfo(PlayerReplicationInfo).ClientVeteranSkill.static.GetMovementSpeedModifier(KFPlayerReplicationInfo(PlayerReplicationInfo));
         }
 
-        GroundSpeed*= 1-fmin(1, myScore/class'WeightedDoshMut'.default.maxScore);
+        GroundSpeed*= 1-fmin(1, float(currScore)/class'WeightedDoshMut'.default.maxScore);
 
         if (class'WeightedDoshMut'.default.bDispSpeed && 
-                prevGroundSpeed != GroundSpeed) {
-            speedMsg= chr(27)$chr(150)$chr(26)$chr(26)$"Ground speed: "$GroundSpeed;
+                prevScore != currScore) {
+            speedMsg= chr(27)$chr(1)$chr(200)$chr(26)$"Ground speed: "$GroundSpeed;
             KFPC.ClientMessage(speedMsg);
-            prevGroundSpeed= GroundSpeed;
+            prevScore= currScore;
         }
     }
 }
 
 defaultproperties {
-    prevGroundSpeed= GroundSpeed;
+    prevScore= 0;
 }
