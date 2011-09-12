@@ -1,0 +1,27 @@
+Author:
+Scary Ghost
+
+Install:
+Copy the contents in the system folder to your Killing Floor system folder.
+
+Usage:
+Set the "0 speed dosh amount" field to whatever value you want.  When a 
+player has at least that amount of dosh, their speed will be 0.  The 
+player's speed will decrease linearly as he approaches that limit.
+
+If you want to recieve periodic updates for your current speed, you check 
+the "Display player speed" box.  Everytime your dosh amount changes, you 
+will recieve a message indicating your new speed.
+
+*IMPORTANT*
+This mutator is designed to work with Marco's ServerPerks mutator.  You 
+can download that mutator from the TWI forum thread:
+http://forums.tripwireinteractive.com/showthread.php?t=36065
+
+
+Source code:
+https://github.com/scaryghost/WeightedDosh
+
+Download:
+http://dl.dropbox.com/u/16251678/WeightedDosh_v1.0.1.zip
+
