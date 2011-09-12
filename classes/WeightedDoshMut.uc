@@ -39,7 +39,7 @@ static event string GetDescriptionText(string property) {
 
 
 defaultproperties {
-    GroupName="KFWeightedDosh"
+    GroupName="KFDoshMut"
     FriendlyName="Weighted Dosh"
     Description="The more money you have, the slower you move!  Version 1.0.0"
     
